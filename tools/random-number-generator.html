@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Random Number Generator - QuickWebTools</title>
+<meta name="description" content="Generate random numbers with range, quantity and unique options.">
+
+<link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+<nav class="navbar">
+    <div class="logo">QuickWebTools</div>
+    <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../tools.html">Tools</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+    </ul>
+</nav>
+
+<section class="tools">
+<h1>Random Number Generator</h1>
+<p>Generate random numbers with advanced options.</p>
+
+<div class="tool-card tool-card-center">
+
+<label>Range</label>
+<div class="range-grid">
+    <input type="number" id="min" value="1">
+    <input type="number" id="max" value="100">
+</div>
+
+<label>Quantity</label>
+<input type="number" id="quantity" value="1" min="1">
+
+<label class="option-right">
+    <span>Unique numbers</span>
+    <input type="checkbox" id="unique">
+</label>
+
+<label>Separator</label>
+<select id="separator">
+    <option value=",">Comma (,)</option>
+    <option value="newline">New line</option>
+    <option value="space">Space</option>
+    <option value="-">Dash (-)</option>
+</select>
+
+<div class="tool-actions">
+    <button class="btn" onclick="generateRandomNumbers()">Generate</button>
+    <button class="btn" onclick="copyRandom()">Copy</button>
+    <button class="btn" onclick="clearRandom()">Clear</button>
+</div>
+
+<label>Result</label>
+<textarea id="randomResult" readonly></textarea>
+
+<div id="randomStatus" class="tool-status">
+Ready...
+</div>
+
+</div>
+</section>
+
+<footer class="footer">
+<div class="footer-container">
+<h3>QuickWebTools</h3>
+<p>Free simple online tools for everyday use.</p>
+
+<div class="footer-links">
+<a href="../index.html">Home</a>
+<a href="../tools.html">Tools</a>
+<a href="../about.html">About</a>
+<a href="../contact.html">Contact</a>
+</div>
+
+<p>© 2026 QuickWebTools</p>
+</div>
+</footer>
+
+<script>
+function getSeparator(value){
+    if(value === "newline") return "\n";
+    if(value === "space") return " ";
+    return value;
+}
+
+function generateRandomNumbers(){
+
+    const min = parseInt(document.getElementById("min").value);
+    const max = parseInt(document.getElementById("max").value);
+    const qty = parseInt(document.getElementById("quantity").value);
+    const unique = document.getElementById("unique").checked;
+    const separatorValue = document.getElementById("separator").value;
+
+    const separator = getSeparator(separatorValue);
+
+    const output = document.getElementById("randomResult");
+    const status = document.getElementById("randomStatus");
+
+    if(min > max){
+        status.textContent = "Min cannot be greater than Max";
+        return;
+    }
+
+    const results = [];
+
+    if(unique){
+
+        const range = max - min + 1;
+
+        if(qty > range){
+            status.textContent = "Quantity exceeds range";
+            return;
+        }
+
+        const pool = [];
+        for(let i=min;i<=max;i++) pool.push(i);
+
+        for(let i=0;i<qty;i++){
+            const index = Math.floor(Math.random()*pool.length);
+            results.push(pool[index]);
+            pool.splice(index,1);
+        }
+
+    }else{
+
+        for(let i=0;i<qty;i++){
+            results.push(
+                Math.floor(Math.random()*(max-min+1))+min
+            );
+        }
+
+    }
+
+    output.value = results.join(separator);
+    status.textContent = "Generated " + results.length + " numbers";
+}
+
+function copyRandom(){
+    const output = document.getElementById("randomResult");
+    output.select();
+    document.execCommand("copy");
+    document.getElementById("randomStatus").textContent="Copied!";
+}
+
+function clearRandom(){
+    document.getElementById("randomResult").value="";
+    document.getElementById("randomStatus").textContent="Cleared";
+}
+</script>
+
+</body>
+</html>
