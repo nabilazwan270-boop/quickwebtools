@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator - QuickWebTools</title>
+    <meta name="description" content="Generate QR codes instantly from text or URL. Customize size and colors, then download as PNG.">
+    <meta name="robots" content="index, follow">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo">QuickWebTools</div>
+    <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../tools.html">Tools</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+    </ul>
+</nav>
+
+<section class="tools">
+    <h1>QR Code Generator</h1>
+    <p>Create QR codes instantly from text or URL.</p>
+
+    <div class="tool-card" style="max-width:900px;margin:0 auto;padding:28px;">
+        <div style="display:grid;gap:16px;text-align:left;">
+            <div>
+                <label for="qrText">Text or URL</label><br>
+                <input type="text" id="qrText" placeholder="Enter text or link..." autocomplete="off" inputmode="url">
+            </div>
+
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;">
+                <div>
+                    <label for="qrSize">Size</label><br>
+                    <input type="number" id="qrSize" value="256" min="128" max="1024" step="16">
+                </div>
+
+                <div>
+                    <label for="qrDark">Foreground</label><br>
+                    <input type="color" id="qrDark" value="#000000" style="height:48px;padding:6px;">
+                </div>
+
+                <div>
+                    <label for="qrLight">Background</label><br>
+                    <input type="color" id="qrLight" value="#ffffff" style="height:48px;padding:6px;">
+                </div>
+
+                <div>
+                    <label for="qrLevel">Error Correction</label><br>
+                    <select id="qrLevel" style="width:100%;padding:14px;border-radius:12px;background:rgba(255,255,255,.05);color:var(--text);border:1px solid rgba(255,255,255,.12);">
+                        <option value="L">Low</option>
+                        <option value="M" selected>Medium</option>
+                        <option value="Q">Quartile</option>
+                        <option value="H">High</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+    <label>Logo (optional)</label>
+    <input type="file" id="qrLogo" accept="image/*">
+</div>
+
+            <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                <button class="btn" type="button" onclick="generateQRCode()">Generate</button>
+                <button class="btn" type="button" onclick="downloadQRCode()">Download</button>
+                <button class="btn" type="button" onclick="clearQRCode()">Clear</button>
+            </div>
+
+            <div style="margin-top:25px;text-align:center;">
+    <canvas id="qrCanvas"></canvas>
+</div>
+
+            <p id="qrMessage" aria-live="polite" style="margin-top:10px;color:var(--muted);">
+                Enter text then generate QR code.
+            </p>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="footer-container">
+        <h3>QuickWebTools</h3>
+        <p>Free simple online tools.</p>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="../js/script.js"></script>
+</body>
+</html>
