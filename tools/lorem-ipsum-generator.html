@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Lorem Ipsum Generator - QuickWebTools</title>
+    <meta name="description" content="Generate professional Lorem Ipsum placeholder text with custom paragraphs, sentences, and quick copy support.">
+    <meta name="keywords" content="lorem ipsum generator, placeholder text generator, dummy text, online tools, quickwebtools">
+    <meta name="author" content="QuickWebTools">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#0b1220">
+
+    <meta property="og:title" content="Lorem Ipsum Generator - QuickWebTools">
+    <meta property="og:description" content="Generate professional Lorem Ipsum placeholder text with custom paragraphs and sentences.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://quickwebtools.vercel.app/tools/lorem-ipsum-generator.html">
+    <meta property="og:image" content="https://quickwebtools.vercel.app/preview.png">
+
+    <link rel="canonical" href="https://quickwebtools.vercel.app/tools/lorem-ipsum-generator.html">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon.png">
+    <link rel="apple-touch-icon" href="../favicon.png">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<nav class="navbar" aria-label="Main navigation">
+    <div class="logo">QuickWebTools</div>
+    <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../tools.html">Tools</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+    </ul>
+</nav>
+
+<main class="tool-page">
+    <section class="tool-header">
+        <h1>Lorem Ipsum Generator</h1>
+        <p>Generate placeholder text instantly with custom paragraphs and sentences.</p>
+    </section>
+
+    <section class="tool-card tool-card-center">
+        <div class="tool-grid-single">
+            <div>
+                <label for="loremParagraphs">Paragraphs</label>
+                <input type="number" id="loremParagraphs" min="1" max="20" value="3" step="1">
+            </div>
+
+            <div>
+                <label for="loremSentences">Sentences per paragraph</label>
+                <input type="number" id="loremSentences" min="1" max="10" value="4" step="1">
+            </div>
+
+            <div class="tool-actions">
+                <button class="btn" type="button" onclick="generateLorem()">Generate</button>
+                <button class="btn" type="button" onclick="copyLorem()">Copy</button>
+                <button class="btn" type="button" onclick="clearLorem()">Clear</button>
+            </div>
+
+            <div>
+                <label for="loremResult">Result</label>
+                <textarea
+                    id="loremResult"
+                    readonly
+                    placeholder="Generated Lorem Ipsum will appear here..."
+                ></textarea>
+            </div>
+
+            <div id="loremStats" class="tool-status">
+                Words: 0 | Characters: 0
+            </div>
+        </div>
+
+        <div class="info-box">
+            <strong>Tip:</strong> This generator works directly in your browser and supports quick copying for faster workflow.
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <div class="footer-container">
+        <h3>QuickWebTools</h3>
+        <p>Free simple online tools for everyday use.</p>
+
+        <div class="footer-links">
+            <a href="../index.html">Home</a>
+            <a href="../tools.html">Tools</a>
+            <a href="../about.html">About</a>
+            <a href="../contact.html">Contact</a>
+        </div>
+
+        <p class="copyright">© 2026 QuickWebTools. All rights reserved.</p>
+    </div>
+</footer>
+
+<script src="../js/script.js"></script>
+</body>
+</html>

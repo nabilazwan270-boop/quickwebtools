@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Random Number Generator - QuickWebTools</title>
+    <meta name="description" content="Generate random numbers with range, quantity, unique numbers, and separator options.">
+    <meta name="keywords" content="random number generator, number picker, unique random numbers, online tools">
+    <meta name="author" content="QuickWebTools">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#0b1220">
+
+    <meta property="og:title" content="Random Number Generator - QuickWebTools">
+    <meta property="og:description" content="Generate random numbers with range, quantity, and unique options.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://quickwebtools.vercel.app/tools/random-number-generator.html">
+    <meta property="og:image" content="https://quickwebtools.vercel.app/preview.png">
+
+    <link rel="canonical" href="https://quickwebtools.vercel.app/tools/random-number-generator.html">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon.png">
+    <link rel="apple-touch-icon" href="../favicon.png">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<nav class="navbar" aria-label="Main navigation">
+    <div class="logo">QuickWebTools</div>
+    <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../tools.html">Tools</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+    </ul>
+</nav>
+
+<main class="tool-page">
+    <section class="tool-header">
+        <h1>Random Number Generator</h1>
+        <p>Generate random numbers with range, quantity, unique mode, and separator options.</p>
+    </section>
+
+    <section class="tool-card tool-card-center">
+        <div class="tool-grid-single">
+            <div class="range-grid">
+                <div>
+                    <label for="min">Minimum</label>
+                    <input type="number" id="min" value="1" step="1">
+                </div>
+
+                <div>
+                    <label for="max">Maximum</label>
+                    <input type="number" id="max" value="100" step="1">
+                </div>
+            </div>
+
+            <div>
+                <label for="quantity">Quantity</label>
+                <input type="number" id="quantity" value="1" min="1" step="1">
+            </div>
+
+            <label class="checkbox-row" for="unique">
+                <input type="checkbox" id="unique">
+                <span>Unique numbers only</span>
+            </label>
+
+            <div>
+                <label for="separator">Separator</label>
+                <select id="separator">
+                    <option value=",">Comma (,)</option>
+                    <option value="newline">New line</option>
+                    <option value="space">Space</option>
+                    <option value="-">Dash (-)</option>
+                </select>
+            </div>
+
+            <div class="tool-actions">
+                <button class="btn" onclick="generateRandomNumbers()">Generate</button>
+                <button class="btn" onclick="copyRandom()">Copy</button>
+                <button class="btn" onclick="clearRandom()">Clear</button>
+            </div>
+
+            <div>
+                <label for="randomResult">Result</label>
+                <textarea id="randomResult" readonly placeholder="Generated numbers will appear here..."></textarea>
+                <div id="randomStatus" class="tool-status">Ready...</div>
+            </div>
+        </div>
+
+        <div class="info-box">
+            <strong>Tip:</strong> Unique mode will prevent duplicate numbers as long as the quantity does not exceed the available range.
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <div class="footer-container">
+        <h3>QuickWebTools</h3>
+        <p>Free simple online tools for everyday use.</p>
+
+        <div class="footer-links">
+            <a href="../index.html">Home</a>
+            <a href="../tools.html">Tools</a>
+            <a href="../about.html">About</a>
+            <a href="../contact.html">Contact</a>
+        </div>
+
+        <p class="copyright">© 2026 QuickWebTools. All rights reserved.</p>
+    </div>
+</footer>
+
+<script>
+    const minEl = document.getElementById("min");
+    const maxEl = document.getElementById("max");
+    const quantityEl = document.getElementById("quantity");
+    const uniqueEl = document.getElementById("unique");
+    const separatorEl = document.getElementById("separator");
+    const resultEl = document.getElementById("randomResult");
+    const statusEl = document.getElementById("randomStatus");
+
+    function setStatus(message) {
+        if (statusEl) statusEl.textContent = message;
+    }
+
+    function getSeparator(value) {
+        if (value === "newline") return "\n";
+        if (value === "space") return " ";
+        return value;
+    }
+
+    function getIntValue(el, fallback) {
+        const value = parseInt(el?.value, 10);
+        return Number.isFinite(value) ? value : fallback;
+    }
+
+    function generateRandomNumbers() {
+        if (!minEl || !maxEl || !quantityEl || !uniqueEl || !separatorEl || !resultEl) return;
+
+        const min = getIntValue(minEl, 1);
+        const max = getIntValue(maxEl, 100);
+        const quantity = Math.max(1, getIntValue(quantityEl, 1));
+        const unique = uniqueEl.checked;
+        const separator = getSeparator(separatorEl.value);
+
+        if (min > max) {
+            resultEl.value = "";
+            setStatus("Minimum cannot be greater than maximum.");
+            return;
+        }
+
+        const rangeSize = max - min + 1;
+
+        if (unique && quantity > rangeSize) {
+            resultEl.value = "";
+            setStatus("Quantity exceeds the available unique range.");
+            return;
+        }
+
+        const results = [];
+
+        if (unique) {
+            const pool = [];
+            for (let i = min; i <= max; i++) pool.push(i);
+
+            for (let i = 0; i < quantity; i++) {
+                const index = Math.floor(Math.random() * pool.length);
+                results.push(pool[index]);
+                pool.splice(index, 1);
+            }
+        } else {
+            for (let i = 0; i < quantity; i++) {
+                const value = Math.floor(Math.random() * (max - min + 1)) + min;
+                results.push(value);
+            }
+        }
+
+        resultEl.value = results.join(separator);
+        setStatus(`Generated ${results.length} number${results.length > 1 ? "s" : ""}.`);
+    }
+
+    async function copyRandom() {
+        if (!resultEl) return;
+
+        const text = resultEl.value.trim();
+        if (!text) {
+            setStatus("Nothing to copy.");
+            return;
+        }
+
+        try {
+            await navigator.clipboard.writeText(text);
+            setStatus("Copied to clipboard.");
+        } catch (error) {
+            resultEl.select();
+            document.execCommand("copy");
+            setStatus("Copied to clipboard.");
+        }
+    }
+
+    function clearRandom() {
+        if (resultEl) resultEl.value = "";
+        if (statusEl) statusEl.textContent = "Cleared.";
+        if (minEl) minEl.value = 1;
+        if (maxEl) maxEl.value = 100;
+        if (quantityEl) quantityEl.value = 1;
+        if (uniqueEl) uniqueEl.checked = false;
+        if (separatorEl) separatorEl.value = ",";
+    }
+
+    if (minEl) minEl.addEventListener("input", () => setStatus("Ready..."));
+    if (maxEl) maxEl.addEventListener("input", () => setStatus("Ready..."));
+    if (quantityEl) quantityEl.addEventListener("input", () => setStatus("Ready..."));
+    if (separatorEl) separatorEl.addEventListener("change", () => setStatus("Ready..."));
+</script>
+</body>
+</html>

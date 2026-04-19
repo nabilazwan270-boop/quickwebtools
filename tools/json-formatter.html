@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>JSON Formatter - QuickWebTools</title>
+    <meta name="description" content="Format, validate, and minify JSON online with QuickWebTools. Fast, simple, and browser-based.">
+    <meta name="keywords" content="json formatter, json validator, json minifier, online tools, quickwebtools">
+    <meta name="author" content="QuickWebTools">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#0b1220">
+
+    <meta property="og:title" content="JSON Formatter - QuickWebTools">
+    <meta property="og:description" content="Format, validate, and minify JSON instantly in your browser.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://quickwebtools.vercel.app/tools/json-formatter.html">
+    <meta property="og:image" content="https://quickwebtools.vercel.app/preview.png">
+
+    <link rel="canonical" href="https://quickwebtools.vercel.app/tools/json-formatter.html">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon.png">
+    <link rel="apple-touch-icon" href="../favicon.png">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<nav class="navbar" aria-label="Main navigation">
+    <div class="logo">QuickWebTools</div>
+    <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../tools.html">Tools</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+    </ul>
+</nav>
+
+<main class="tool-page">
+    <section class="tool-header">
+        <h1>JSON Formatter</h1>
+        <p>Format, validate, and minify JSON instantly.</p>
+    </section>
+
+    <section class="tool-card tool-card-center">
+        <div class="tool-grid-single">
+            <div>
+                <label for="jsonInput">Input JSON</label>
+                <textarea
+                    id="jsonInput"
+                    placeholder="Paste JSON here..."
+                ></textarea>
+            </div>
+
+            <div class="tool-actions">
+                <button class="btn" type="button" onclick="formatJSON()">Format</button>
+                <button class="btn" type="button" onclick="minifyJSON()">Minify</button>
+                <button class="btn" type="button" onclick="validateJSON()">Validate</button>
+                <button class="btn" type="button" onclick="copyJSON()">Copy</button>
+                <button class="btn" type="button" onclick="clearJSON()">Clear</button>
+            </div>
+
+            <div>
+                <label for="jsonOutput">Result</label>
+                <textarea
+                    id="jsonOutput"
+                    readonly
+                    placeholder="Formatted JSON will appear here..."
+                ></textarea>
+            </div>
+
+            <div id="jsonStatus" class="tool-status">
+                Ready to format JSON...
+            </div>
+        </div>
+
+        <div class="info-box">
+            <strong>Tip:</strong> Paste valid JSON to format it neatly, or use minify to compress the output into one line.
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <div class="footer-container">
+        <h3>QuickWebTools</h3>
+        <p>Free simple online tools for everyday use.</p>
+
+        <div class="footer-links">
+            <a href="../index.html">Home</a>
+            <a href="../tools.html">Tools</a>
+            <a href="../about.html">About</a>
+            <a href="../contact.html">Contact</a>
+        </div>
+
+        <p class="copyright">
+            © 2026 QuickWebTools. All rights reserved.
+        </p>
+    </div>
+</footer>
+
+<script src="../js/script.js"></script>
+</body>
+</html>
